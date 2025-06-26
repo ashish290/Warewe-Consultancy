@@ -36,9 +36,11 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState<number>(0);
 
+  const backend_URI = import.meta.env.VITE_API_URL;
+
   const getLog = async () => {
     setLoading(true);
-    const res = await axios.get("http://localhost:3000/api/get-log", {
+    const res = await axios.get(`${backend_URI}/api/get-log`, {
       withCredentials: true,
     });
     if (res.data) {
@@ -66,7 +68,7 @@ function App() {
         url: url,
         requestBody: body,
       };
-      const res = await axios.post("http://localhost:3000/api/log", value, {
+      const res = await axios.post(`${backend_URI}/api/log`, value, {
         withCredentials: true,
       });
       setStatus(res.status);
